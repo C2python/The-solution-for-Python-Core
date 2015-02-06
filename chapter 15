@@ -63,3 +63,18 @@ for eachline in f.readlines():
         print 'Bad data: %s.' % eachline
 f.close()
 ################
+15.19：
+ patt = '^\w{3} \w{3} \d{2} \d{2}:\d{2}:\d{2} \d{4}'
+15.20:
+ patt = '\w+@\w+\.\w+'
+15.21:
+ patt = '^\w{3} (\w{3}) \d{2} \d{2}:\d{2}:\d{2} \d{4}'
+ re.search(patt,data).group(1)
+15.22:
+ as above
+15.23:
+ patt = '^\w{3} \w{3} \d{2} (\d{2}:\d{2}:\d{2}) \d{4}'
+ re.search(patt,data).group(1)
+15.26:
+ patt = '\w+@\w+\.\w+'
+ re.subn(patt,'zw1991@mail.ustc.edu.cn',data)
