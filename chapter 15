@@ -1,1 +1,65 @@
 # The-solution-for-Python-Core
+15.5:
+ patt = r'\b\d+ ([A-Za-z]+ )*([A-Za-z]+)\b'
+15.9:
+ patt = r'(\+|-)?(\d+\.\d*|\d*\.\d+)((e|E)(\+|-)?\d+)?$'
+15.13：
+ patt = '\'(\w+)\''
+ m.group(1)
+15.16:
+code:
+from random import randint, choice
+from string import lowercase
+from sys import maxint
+from time import ctime
+import re
+
+doms = ('com', 'edu', 'net', 'org', 'gov')
+
+f = open(r'E:\python\redata.txt','a')
+
+for i in range(randint(5,10)):
+    dint = randint(0,maxint)
+    dtstr = ctime(dint)
+    shorter = randint(4,7)
+    em=''
+    for j in range(shorter):
+        em+=choice(lowercase)
+
+    longer = randint(shorter,12)
+    dn=''
+    for j in range(longer):
+        dn+=choice(lowercase)
+
+    f.write('%s::%s@%s.%s::%d-%d-%d\n' % (dtstr, em, dn, choice(doms), dint, shorter, longer))
+f.close()
+##############
+15.17:
+code:
+import re
+f = open(r'E:\python\redata.txt','r')
+week_int = {}
+patt = '^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)'
+for eachline in f.readlines():
+    m = re.search(patt,eachline)
+    if m.group(1) not in week_int:
+        week_int[m.group(1)] = 1
+    else:
+        week_int[m.group(1)]+=1
+for key in week_int:
+    print 'Week: %s, count: %s' % (key,week_int[key])
+f.close()
+################
+15.18:
+code:
+import re
+from time import ctime
+f = open(r'E:\python\redata.txt','r')
+patt1_dtstr = '.+?(\d+)-'
+for eachline in f.readlines():
+    m = re.search(patt1_dtstr,eachline)
+    dtstr = ctime(int(m.group(1)))
+    if re.match(dtstr,eachline) is None:
+        print 'Bad data: %s.' % eachline
+f.close()
+################
